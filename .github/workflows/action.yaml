@@ -27,13 +27,21 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_REGISTRY }}/nodejs
       
+      - name: Generate tags
+        id: docker_tags
+        uses: dnaka91/action-docker-tags@v0.1
+        with:
+            registries: |
+              docker.io
+              ghcr.io
+              quay.io
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         env: 
           MONGODB_URI: ${{ env.MONGODB_URI }}
-          TAG: latest, ${{ steps.meta.outputs.tags }}
+          TAG: ${{ steps.docker_tags.outputs.tags }}
         with:
           compose-file: ./docker-compose.yml
           push: true
-          tags: latest, ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.docker_tags.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
