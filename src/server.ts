@@ -19,19 +19,19 @@ mongoose.connect(process.env.MONGODB_URI || "").then(() => {
     console.log("🚀 ~ mongoose.connect ~ err:", err)
 })
 
-app.get("/", (req, res) => res.send("<h1>Server is running.</h1>"))
+app.get("/", (_, res) => res.send("<h1>Server is running.</h1>"))
 
-app.get("/user", async (req, res) => {
+app.get("/user", async (_, res) => {
     const user = await new User({ name: faker.person.firstName() }).save();
     res.send(user)
 })
 
-app.get("/user/get", async (req, res) => {
+app.get("/user/get", async (_, res) => {
     const users = await User.find()
     res.send(users)
 })
 
-app.get("/user/delete", async (req, res) => {
+app.get("/user/delete", async (_, res) => {
     await User.deleteMany()
     res.send({ success: true })
 })
