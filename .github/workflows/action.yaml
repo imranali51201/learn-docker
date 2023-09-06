@@ -31,9 +31,9 @@ jobs:
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         env: 
           MONGODB_URI: ${{ env.MONGODB_URI }}
-          TAG: ${{ steps.meta.outputs.tags }}
+          TAG: ${{ github.run_number }}
         with:
           compose-file: ./docker-compose.yml
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ github.run_number }}
           labels: ${{ steps.meta.outputs.labels }}
