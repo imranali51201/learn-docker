@@ -35,3 +35,17 @@ To add volume to container add these extra parameter in run command
 ~~~bash  
   -v my-volume:/data/db
 ~~~
+
+## To run multiple docker containers together with docker compose 
+
+Setup [docker-compose.yaml](/docker-compose.yaml), then run this command
+
+~~~bash  
+  docker-compose up -d --build
+~~~
+
+## To run auto CI/CD pipeline through github action 
+
+Setup [action.yaml](/.github/workflows/action.yaml), and then push code to github
+
+For further information got chekout Docker official [documentation](https://docs.docker.com/)
