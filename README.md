@@ -1,41 +1,37 @@
-
-  # To make image of this server run
-       
-  Import your existing Readme using the import button at the bottom, 
-  or create a new Readme from scratch by typing in the editor.  
-  
-  ## Get Started 🚀  
-  To get started, hit the 'clear' button at the top of the editor!  
-  
-  ## Prebuilt Components/Templates 🔥  
-  You can checkout prebuilt components and templates by clicking on the 'Add Section' button or menu icon
-  on the top left corner of the navbar.
-      
-  ## Save Readme ✨  
-  Once you're done, click on the save button to download and save your ReadMe!
-  
 ##  Mannual build images and run containers
 
-To build current server image run commad
+Setup [Dockerfile](/Dockerfile), then run these commands
 
 ~~~bash  
-  docker build --build-arg MONGODB_URI
+  docker build --build-arg MONGODB_URI=`MONGODB_URI` nodejs:1.0 . 
 ~~~
 
-Go to the project directory  
+To run that built image
 
 ~~~bash  
-  cd my-project
+  docker run -d --name nodejs_container -p 5000:4000 nodejs:1.0
 ~~~
 
-Install dependencies  
+To create newtwork  
 
 ~~~bash  
-npm install
+  docker network create my-network
 ~~~
 
-Start the server  
+To create volume  
 
 ~~~bash  
-npm run start
-~~~  
+  docker volume create my-volume
+~~~
+
+To add network to container add these extra parameter in run command  
+
+~~~bash  
+  --network my-network
+~~~
+
+To add volume to container add these extra parameter in run command  
+
+~~~bash  
+  -v my-volume:/data/db
+~~~
